@@ -2,6 +2,7 @@
 * {
   box-sizing: border-box;
   cursor: pointer;
+  font-size: 10px;
 }
 
 body {
@@ -62,6 +63,7 @@ table {
   width: 100%;
   height: 100px;
   padding: 30px;
+  font-size: 1.8em;
 }
 
 .x {
@@ -86,11 +88,12 @@ table {
   display: inline-block;
   border: none;
   color: white;
-  font-size: 10px;
+  font-size: 1em;
   font-weight: 600;
   letter-spacing: 2px;
-  padding: 10px;
-  border-radius: 2%;
+  padding: 4%;
+  border-radius: 5%;
+  transition: all .5s;
 }
 
 .btn:hover{
@@ -104,8 +107,25 @@ table {
 .btn__checkAll {
   background-color: rgba(61, 161, 61, 0.644);
 }
-
+.tarefa {
+  font-size: 1.5em;
+}
 .tarefa:hover {
   text-shadow: 0px 0px 1px rgba(128, 128, 128, 0.685);
   background-color: rgba(19, 14, 14, 0.116);
+}
+
+
+#arrowTop {    
+    color: purple;
+    text-shadow: 0px 0px 1px grey;
+    position: fixed;
+    top: 5%;
+    left: 25%;
+    cursor: pointer;
+    background: 0 0;
+    border: 0;
+    font-size: 4em;
+    cursor: pointer;
+    transition: 0.3s;
 }

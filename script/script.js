@@ -35,37 +35,38 @@ button.addEventListener("click", function (e) {
   })
 })
 
-//Aqui criamos a checagem dos itens, quando clica fica como "tarefa feita", e se clica de novo, volta ao normal
 function checkItem(td) {
   let row = td
-
   if (row.style.color == "black") {
     row.style.textDecoration = "line-through"
     row.style.color = "grey"
+    
   }
   else {
     row.style.textDecoration = "none"
     row.style.color = "black"
-
   }
 }
 
 // Aqui criamos o a checagem conectada com o botão "checkall", que dará "check" em todas as tarefas, e se clicar novamente, volta ao normal
+const checkedAllBtn = document.querySelector(".btn__checkAll");
+let contador = 0;
+
 function checkAll() {
-
   let checkboxes = document.querySelectorAll(".tarefa")
-
   for (let i = 0; i < checkboxes.length; i++) {
-    if (checkboxes[i].style.color == "black") {
+    if (contador % 2 === 0) {
       checkboxes[i].style.textDecoration = "line-through"
       checkboxes[i].style.color = "grey"
+      checkedAllBtn.innerHTML = "Uncheck all"
     }
     else {
       checkboxes[i].style.textDecoration = "none"
       checkboxes[i].style.color = "black"
-
+      checkedAllBtn.innerHTML = "Check all"
     }
   }
+  contador++
 }
 
 // Criamos o botão deletar tarefa no "X"
@@ -74,5 +75,17 @@ function deletar(r) {
   item.remove()
 }
 
+const buttonTOP = document.getElementById("arrowTop")
 
+buttonTOP.addEventListener("click", function(){
+    window.scrollTo(pageYOffset, 0);
+})
 
+window.addEventListener("scroll", function(){
+  console.log(buttonTOP)
+    if(pageYOffset > 100){
+        buttonTOP.hidden = false;
+        return false;
+    }
+    buttonTOP.hidden = true;
+})
