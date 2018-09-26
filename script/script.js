@@ -1,39 +1,43 @@
 const button = document.querySelector(".btn__adicionar")
 const input = document.querySelector(".adicionar__tarefa")
-const tabela = document.querySelector(".tabela")
+const div =  document.querySelector(".tabela")
+ const ul = document.querySelector("ul");
+
+let c = 0;
 
 button.addEventListener("click", function (e) {
   e.preventDefault()
-
-  //Aqui ele não inputa de tiver vazio, indefinido ou com espaço
-  if (input.value === undefined || input.value === "" || input.value === " " || input.value === null) {
+  const regex = /\w+/ig
+  //Aqui ele não inpu+ta de tiver vazio, indefinido ou com espaço
+  if (!regex.test(input.value)) {
     input.focus()
     return false
   }
 
-  // Aqui criamos a linha da coluna
-  const linha = document.createElement("tr")
+  const li = document.createElement("li")
 
-  // Aqui preenchemos as linhas da coluna, usando template strings e innerHTML
-  linha.innerHTML = `<span draggable="true" > 
-                       <td class="tarefa" onclick="checkItem(this)"> ${input.value} </td> 
-                       <td class="x" onclick="deletar(this)"> x </td>
-                     </span>`
+  li.setAttribute("draggable", "true")
+  li.setAttribute("ondragstart", "drag(event)")
+  li.setAttribute("ondragover", "allowDrop(event)")
+  li.setAttribute("ondrop", "drop(event)")
+  li.setAttribute("onclick", "checkItem(this)")
+  li.setAttribute("id", `drag${c}`)
+  li.classList.add("tarefa")
+  li.innerHTML = `${input.value} <span class="x" onclick="deletar(this)"> x </span>`
+          
+ul.appendChild(li)
+input.value = ""
+c++
 
-  // Colocamos a linha dentro da tabela
-  tabela.appendChild(linha)
-
-  // Zeramos o valor do Input após o clique
-  input.value = ""
-
-  // Criamos o botão que remove todas as linhas/tarefas
-  const btnDeletaTudo = document.querySelector(".btn__excluirTudo")
+const btnDeletaTudo = document.querySelector(".btn__excluirTudo")
   btnDeletaTudo.addEventListener("click", function (e) {
     e.preventDefault()
-    linha.remove()
+    li.remove()
+    
 
   })
 })
+
 
 function checkItem(td) {
   let row = td
@@ -45,10 +49,11 @@ function checkItem(td) {
   else {
     row.style.textDecoration = "none"
     row.style.color = "black"
+
+
   }
 }
 
-// Aqui criamos o a checagem conectada com o botão "checkall", que dará "check" em todas as tarefas, e se clicar novamente, volta ao normal
 const checkedAllBtn = document.querySelector(".btn__checkAll");
 let contador = 0;
 
@@ -69,7 +74,6 @@ function checkAll() {
   contador++
 }
 
-// Criamos o botão deletar tarefa no "X"
 function deletar(r) {
   let item = r.parentNode
   item.remove()
@@ -89,3 +93,17 @@ window.addEventListener("scroll", function(){
     }
     buttonTOP.hidden = true;
 })
+
+//drop FUCNTION
+function allowDrop(allowdropevent) {
+    allowdropevent.preventDefault();
+}
+function drag(dragevent) {
+    dragevent.dataTransfer.setData("text", dragevent.target.id);
+}
+function drop(dropevent) {
+    dropevent.preventDefault();
+    var data = dropevent.dataTransfer.getData("text");
+    console.log(dropevent.target)
+    dropevent.target.parentNode.appendChild(document.getElementById(data));
+}
