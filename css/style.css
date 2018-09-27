@@ -1,12 +1,13 @@
-/*GERAL */
+/* GERAL */
 * {
   box-sizing: border-box;
   font-size: 10px;
 }
 
 body {
-  background-color: rgba(139, 42, 126, 0.514);
+  background-image: linear-gradient(rgba(79, 13, 167, 0.363) 15%, white 60%, rgba(202, 63, 214, 0.192) 95% );
   font-family: 'Open Sans', sans-serif;
+  min-height: 100vh;
 }
 
 ul, li {
@@ -18,8 +19,8 @@ ul, li {
 /* CONTEÚDO */
 
 main {
-  background: #f2f5f0; /* Old browsers */
-  box-shadow: 0px 0px 1px black;
+  background: #f6f7f5e1; /* Old browsers */
+  box-shadow: 1px 2px 10px black;
   width: 30%;
   margin: 5% auto;
   padding: 20px 0px 5px 0px;
@@ -33,21 +34,21 @@ h1 {
   padding: 15px;
 }
 
-tr td {
+/* tr td {
   width: 100%;
 }
 
 td {
   border-bottom: .5px solid rgba(161, 160, 160, 0.288);
   padding: 10px;
-}
+} */
 
 table {
   border-collapse: collapse;
   transition: all 1s;
 }
 
-/*BOTÕES*/
+/*btn*/
 
 .btn__adicionar {
   background-color: #7050bb;
@@ -74,16 +75,19 @@ table {
 }
 
 .x {
-  font-size: 1em;
+  font-size: 2em;
   color: red;
   cursor: pointer;
   transform: all 1s;
   position: relative;
-  left: 1px;
+  left: 1px;  
 }
-
+i {
+  font-size: 1em;
+}
 .x:hover{
-  transform: scale(1.5)
+  transform: scale(1.5);
+
 }
 
 .btn__box {
@@ -119,29 +123,35 @@ table {
   background-color: rgba(61, 161, 61, 0.644);
 }
 .tarefa {
-  font-size: 1.5em;
   background: #f2f2f2;
   display: flex;
+  align-items: center;
   justify-content: space-between;
   padding: 10px;
   cursor: pointer;
   width: 100%;
 }
+
+p {
+  font-size: 2em;
+}
+
 .tarefa:hover {
   text-shadow: 0px 0px 1px rgba(128, 128, 128, 0.685);
   opacity: 0.8;
   font-weight: 600;
 }
+
 li:nth-child(odd) { 
   background:#e7e7ee; 
 }
 
 #arrowTop {    
     color: purple;
-    text-shadow: 0px 0px 1px grey;
+    text-shadow: 0px 0px 5px white;
     position: fixed;
-    top: 5%;
-    left: 25%;
+    bottom: 5%;
+    right: 25%;
     cursor: pointer;
     background: 0 0;
     border: 0;
@@ -152,6 +162,35 @@ li:nth-child(odd) {
 
 ul {
   padding: 3px 10px;
+}
+
+
+/* Tooltip container */
+
+.tooltip {
+    position: relative;
+    
+    border-bottom: 1px dotted black; /* If you want dots under the hoverable text */
+}
+
+/* Tooltip text */
+.tooltip .tooltiptext {
+    visibility: hidden;
+    width: 120px;
+    background-color: rgba(1, 1, 1, 0.2);
+    color: #fff;
+    text-align: center;
+    padding: 5px 0;
+    border-radius: 6px;
+     right: -135px;
+    /* Position the tooltip text - see examples below! */
+    position: absolute;
+    z-index: 0;
+}
+
+/* Show the tooltip text when you mouse over the tooltip container */
+.tooltip:hover .tooltiptext {
+    visibility: visible;
 }
 
 @media (max-width: 1200px) {

@@ -5,6 +5,13 @@ const div =  document.querySelector(".tabela")
 
 let c = 0;
 
+input.addEventListener("keyup", function(event) {
+  event.preventDefault();
+  if (event.keyCode === 13) {
+    button.click();
+  }
+});
+
 button.addEventListener("click", function (e) {
   e.preventDefault()
   const regex = /\w+/ig
@@ -20,10 +27,11 @@ button.addEventListener("click", function (e) {
   li.setAttribute("ondragstart", "drag(event)")
   li.setAttribute("ondragover", "allowDrop(event)")
   li.setAttribute("ondrop", "drop(event)")
-  li.setAttribute("onclick", "checkItem(this)")
-  li.setAttribute("id", `drag${c}`)
+  li.setAttribute("dragenter", "dropEnd(e)" )
+  li.setAttribute("id", `${c}`)
   li.classList.add("tarefa")
-  li.innerHTML = `${input.value} <span class="x" onclick="deletar(this)"> x </span>`
+  li.classList.add("tooltip")
+  li.innerHTML = `<p onclick="checkItem(this)">${input.value}</p><span class="x" onclick="deletar(this)"> <i class="fas fa-trash"></i></span> `
           
 ul.appendChild(li)
 input.value = ""
@@ -34,23 +42,22 @@ const btnDeletaTudo = document.querySelector(".btn__excluirTudo")
     e.preventDefault()
     li.remove()
     
-
   })
 })
 
 
-function checkItem(td) {
-  let row = td
-  if (row.style.color == "black") {
+
+function checkItem(evento) {
+  let row = evento
+  
+  
+  if (row.style.color === "" || row.style.color === "black") {
     row.style.textDecoration = "line-through"
     row.style.color = "grey"
-    
   }
   else {
     row.style.textDecoration = "none"
     row.style.color = "black"
-
-
   }
 }
 
@@ -58,7 +65,7 @@ const checkedAllBtn = document.querySelector(".btn__checkAll");
 let contador = 0;
 
 function checkAll() {
-  let checkboxes = document.querySelectorAll(".tarefa")
+  let checkboxes = document.querySelectorAll("p")
   for (let i = 0; i < checkboxes.length; i++) {
     if (contador % 2 === 0) {
       checkboxes[i].style.textDecoration = "line-through"
@@ -95,6 +102,8 @@ window.addEventListener("scroll", function(){
 })
 
 //drop FUCNTION
+
+
 function allowDrop(allowdropevent) {
     allowdropevent.preventDefault();
 }
@@ -102,8 +111,18 @@ function drag(dragevent) {
     dragevent.dataTransfer.setData("text", dragevent.target.id);
 }
 function drop(dropevent) {
+
     dropevent.preventDefault();
-    var data = dropevent.dataTransfer.getData("text");
-    console.log(dropevent.target)
-    dropevent.target.parentNode.appendChild(document.getElementById(data));
+    let data = dropevent.dataTransfer.getData("text");
+
+    let dataDrag = document.getElementById(data)
+    dataDrag.remove()
+    let dataToChange = document.getElementById(dropevent.target.id)
+    dataToChange.insertAdjacentHTML('afterEnd', dataDrag.outerHTML)
+
+    console.log("ELEMENTO TARGET :", dataToChange)
+    console.log("ELEMENTO DRAG :", dataDrag)
+    
+   //outerHTML pega o elemento todo = text + atributos + elementos 
+
 }
