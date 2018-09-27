@@ -205,11 +205,21 @@ ul {
     width: 65%;
     margin: 15% auto;
   }
+  #arrow {
+    position: fixed;
+    top: 5%;
+    left: 25%;
+  }
 }
 
 @media (max-width: 520px) {
     main {
     width: 85%;
     margin: 15% auto;
+  }
+  #arrow {
+    position: fixed;
+    top: 5%;
+    left: 25%;
   }
 }
