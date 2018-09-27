@@ -206,9 +206,7 @@ ul {
     margin: 15% auto;
   }
   #arrow {
-    position: fixed;
-    top: 5%;
-    left: 25%;
+    display: none;
   }
 }
 
@@ -218,8 +216,6 @@ ul {
     margin: 15% auto;
   }
   #arrow {
-    position: fixed;
-    top: 5%;
-    left: 25%;
+    display: none;
   }
 }
