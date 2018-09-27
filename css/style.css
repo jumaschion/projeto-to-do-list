@@ -205,7 +205,7 @@ ul {
     width: 65%;
     margin: 15% auto;
   }
-  #arrow {
+  #arrowTop {
     display: none;
   }
 }
@@ -215,7 +215,7 @@ ul {
     width: 85%;
     margin: 15% auto;
   }
-  #arrow {
+  #arrowTop {
     display: none;
   }
 }
