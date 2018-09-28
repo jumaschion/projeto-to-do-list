@@ -39,8 +39,9 @@ c++
 
 const btnDeletaTudo = document.querySelector(".btn__excluirTudo")
   btnDeletaTudo.addEventListener("click", function (e) {
+    const tarefa = document.querySelector(".tarefa")
     e.preventDefault()
-    li.remove()
+    tarefa.remove()
     
   })
 })
