@@ -1,5 +1,5 @@
-#Projeto To do List
+# Projeto To do List
 
-*Code by: Natalya Peixoto e Ju Maschion
+* Code by: Natalya Peixoto e Ju Maschion
 
 ![Foto do Projeto To do List](projetotodolist.jpg)
