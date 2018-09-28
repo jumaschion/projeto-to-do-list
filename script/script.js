@@ -1,9 +1,7 @@
 const button = document.querySelector(".btn__adicionar")
 const input = document.querySelector(".adicionar__tarefa")
 const div =  document.querySelector(".tabela")
- const ul = document.querySelector("ul");
-
-let c = 0;
+const ul = document.querySelector("ul");
 
 input.addEventListener("keyup", function(event) {
   event.preventDefault();
@@ -12,6 +10,7 @@ input.addEventListener("keyup", function(event) {
   }
 });
 
+let c = 0;
 button.addEventListener("click", function (e) {
   e.preventDefault()
   const regex = /\w+/ig
@@ -22,7 +21,6 @@ button.addEventListener("click", function (e) {
   }
 
   const li = document.createElement("li")
-
   li.setAttribute("draggable", "true")
   li.setAttribute("ondragstart", "drag(event)")
   li.setAttribute("ondragover", "allowDrop(event)")
@@ -31,27 +29,27 @@ button.addEventListener("click", function (e) {
   li.setAttribute("id", `${c}`)
   li.classList.add("tarefa")
   li.classList.add("tooltip")
-  li.innerHTML = `<p onclick="checkItem(this)">${input.value}</p><span class="x" onclick="deletar(this)"> <i class="fas fa-trash"></i></span> `
+  li.innerHTML = `<p class="valor_input" onclick="checkItem(this)">${input.value}</p>
+                  <span class="x" onclick="deletar(this)"> <i class="fas fa-trash"></i></span>`
           
-ul.appendChild(li)
-input.value = ""
-c++
+  ul.appendChild(li)
+  input.value = ""
+  c++
+
+})
 
 const btnDeletaTudo = document.querySelector(".btn__excluirTudo")
   btnDeletaTudo.addEventListener("click", function (e) {
-    const tarefa = document.querySelector(".tarefa")
+    const tarefa = document.querySelectorAll(".tarefa")
+    console.log(tarefa)
     e.preventDefault()
-    tarefa.remove()
-    
+    for (const item of tarefa){
+        item.remove()
+    }
   })
-})
-
-
 
 function checkItem(evento) {
   let row = evento
-  
-  
   if (row.style.color === "" || row.style.color === "black") {
     row.style.textDecoration = "line-through"
     row.style.color = "grey"
@@ -64,7 +62,6 @@ function checkItem(evento) {
 
 const checkedAllBtn = document.querySelector(".btn__checkAll");
 let contador = 0;
-
 function checkAll() {
   let checkboxes = document.querySelectorAll("p")
   for (let i = 0; i < checkboxes.length; i++) {
@@ -84,17 +81,16 @@ function checkAll() {
 
 function deletar(r) {
   let item = r.parentNode
+  console.log(item)
   item.remove()
 }
 
 const buttonTOP = document.getElementById("arrowTop")
-
 buttonTOP.addEventListener("click", function(){
     window.scrollTo(pageYOffset, 0);
 })
 
 window.addEventListener("scroll", function(){
-  console.log(buttonTOP)
     if(pageYOffset > 100){
         buttonTOP.hidden = false;
         return false;
@@ -103,27 +99,29 @@ window.addEventListener("scroll", function(){
 })
 
 //drop FUCNTION
-
-
 function allowDrop(allowdropevent) {
     allowdropevent.preventDefault();
 }
 function drag(dragevent) {
     dragevent.dataTransfer.setData("text", dragevent.target.id);
+    dragevent.target.classList.remove("tarefa")
+    dragevent.target.classList.add("tarefaOnDrag")
 }
 function drop(dropevent) {
-
     dropevent.preventDefault();
     let data = dropevent.dataTransfer.getData("text");
-
     let dataDrag = document.getElementById(data)
-    dataDrag.remove()
+    dataDrag.classList.remove("tarefaOnDrag")
+    dataDrag.classList.add("tarefa")
     let dataToChange = document.getElementById(dropevent.target.id)
-    dataToChange.insertAdjacentHTML('afterEnd', dataDrag.outerHTML)
-
-    console.log("ELEMENTO TARGET :", dataToChange)
-    console.log("ELEMENTO DRAG :", dataDrag)
     
-   //outerHTML pega o elemento todo = text + atributos + elementos 
+    try {
+        dataToChange.insertAdjacentHTML('afterEnd', dataDrag.outerHTML)
+    }
+    catch (e){
+      console.log(``)
+    }
+   dataDrag.remove()
+   
 
 }
